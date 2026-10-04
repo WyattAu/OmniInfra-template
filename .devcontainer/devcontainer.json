@@ -1,0 +1,13 @@
+{
+  // Image flavor: official installers, pinned majors.
+  "name": "OmniInfra",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": { "ghcr.io/devcontainers/features/github-cli:1": {} },
+  "postCreateCommand": "curl -sSfL https://get.opentofu.org/install-opentofu.sh | sudo bash -s -- --install-method deb && sudo apt-get update && sudo apt-get install -y tflint && curl -sSfL https://raw.githubusercontent.com/open-policy-agent/conftest/master/install.sh | sh -s -- -b /usr/local/bin && curl -sSfL https://terraform-docs.io/dl/v0.19.0/terraform-docs-v0.19.0-linux-amd64.tar.gz | tar xz -C /usr/local/bin terraform-docs",
+  "customizations": {
+    "vscode": {
+      "extensions": ["hashicorp.terraform", "tekumara.typos-vscode", "EditorConfig.EditorConfig", "github.vscode-github-actions"],
+      "settings": { "editor.formatOnSave": true, "[terraform]": { "editor.defaultFormatter": "hashicorp.terraform" } }
+    }
+  }
+}

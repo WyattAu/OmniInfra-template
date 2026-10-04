@@ -1,0 +1,7 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "plan (dev)", "type": "shell", "command": "make plan ENV=dev", "problemMatcher": [] },
+    { "label": "ci (all gates)", "type": "shell", "command": "make ci", "problemMatcher": [] }
+  ]
+}
