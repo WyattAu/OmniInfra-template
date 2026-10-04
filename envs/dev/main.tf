@@ -1,3 +1,7 @@
+terraform {
+  required_version = "~> 1.9"
+}
+
 # Environment: dev. Backend + provider pins live here; values in tfvars.
 # Remote backend (s3/azurerm/gcs) is a per-estate decision — scaffold a
 # backend block when the first real env lands.

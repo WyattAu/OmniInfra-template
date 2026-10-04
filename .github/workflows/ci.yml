@@ -47,6 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
+      - run: curl -sSfL https://raw.githubusercontent.com/open-policy-agent/conftest/master/install.sh | sh -s -- -b /usr/local/bin
       - run: ./scripts/plan.sh dev
         env:
           # wire real provider creds via GH environment secrets

@@ -7,11 +7,15 @@ infrastructure; keep one concern per module.
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
 
@@ -21,7 +25,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [terraform_data.this](https://developer.hashicorp.com/terraform/language/resources/terraform-data) | resource |
+| [terraform_data.this](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/resources/data) | resource |
 
 ## Inputs
 
@@ -35,4 +39,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_id"></a> [id](#output\_id) | Placeholder id — replace with a real resource. |
+| <a name="output_summary"></a> [summary](#output\_summary) | Human-readable summary for plan review. |
 <!-- END_TF_DOCS -->
