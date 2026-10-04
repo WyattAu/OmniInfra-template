@@ -2,6 +2,8 @@
 # (estate alignment: policy-kit semantics, fail-closed).
 package main
 
+import rego.v1
+
 deny contains msg if {
   some r in input.resource_changes
   r.mode == "managed"
