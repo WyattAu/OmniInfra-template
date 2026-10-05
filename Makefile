@@ -1,5 +1,5 @@
 # Thin wrapper over scripts/ — the same verbs in every Omni template.
-.PHONY: fmt fmt-check validate lint docs policy plan contract ci clean
+.PHONY: bench bench-update fmt fmt-check validate lint docs policy plan contract ci clean
 
 fmt:
 	./scripts/fmt.sh
@@ -27,6 +27,12 @@ contract:
 
 ## What CI gates before merge (mirror of .github/workflows/ci.yml):
 ci: contract fmt-check validate lint
+
+bench:
+	./scripts/bench-budget.sh
+
+bench-update:
+	./scripts/bench-budget.sh --update
 
 clean:
 	rm -f plan.json
