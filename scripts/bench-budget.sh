@@ -18,12 +18,11 @@ now_ms() {
   python3 -c 'import time; print(int(time.time() * 1000))'
 }
 
-
 start="$(now_ms)"
 make fmt-check validate lint >/dev/null
 end="$(now_ms)"
 
-printf 'gate-ms\t%s\tms\tinfo\n' "$((end - start))" > "$CURRENT"
+printf 'gate-ms\t%s\tms\tinfo\n' "$((end - start))" >"$CURRENT"
 
 python3 scripts/compare-bench.py "$BASELINE" "$CURRENT" \
   --threshold-pct "$THRESHOLD_PCT" "${UPDATE[@]+"${UPDATE[@]}"}"
