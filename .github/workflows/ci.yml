@@ -21,23 +21,23 @@ jobs:
   gates:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: opentofu/setup-opentofu@v2
-      - uses: terraform-linters/setup-tflint@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2
+      - uses: terraform-linters/setup-tflint@6ffdbaa3be476b3431f7275c26966ef32ff60337 # v6
       - run: make ci
 
   docs-drift:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: opentofu/setup-opentofu@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2
       - run: curl -sSfL https://terraform-docs.io/dl/v0.19.0/terraform-docs-v0.19.0-linux-amd64.tar.gz | tar xz -C /usr/local/bin terraform-docs
       - run: make docs && git diff --exit-code -- modules/*/README.md
 
   contract:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - run: ./scripts/check-contract.sh
 
   plan:
@@ -45,8 +45,8 @@ jobs:
     if: ${{ github.repository_owner == 'WyattAu' }}
     environment: dev-apply
     steps:
-      - uses: actions/checkout@v7
-      - uses: opentofu/setup-opentofu@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2
       - name: install conftest (pinned)
         run: curl -sSfL https://github.com/open-policy-agent/conftest/releases/download/v0.56.0/conftest_0.56.0_Linux_x86_64.tar.gz | tar xz -C /usr/local/bin conftest
       - run: ./scripts/plan.sh dev
@@ -60,9 +60,9 @@ jobs:
   perf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: opentofu/setup-opentofu@v2
-      - uses: terraform-linters/setup-tflint@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2
+      - uses: terraform-linters/setup-tflint@6ffdbaa3be476b3431f7275c26966ef32ff60337 # v6
       - run: make bench
 
   # Loop 3: determinism verification. This template's script runs in report mode
@@ -73,6 +73,6 @@ jobs:
   repro:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: opentofu/setup-opentofu@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2
       - run: make repro
