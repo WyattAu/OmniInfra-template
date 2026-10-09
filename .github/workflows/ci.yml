@@ -55,8 +55,20 @@ jobs:
         with:
           persist-credentials: false
       - uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2
-      - name: install conftest (pinned)
-        run: curl -sSfL https://github.com/open-policy-agent/conftest/releases/download/v0.56.0/conftest_0.56.0_Linux_x86_64.tar.gz | tar xz -C /usr/local/bin conftest
+      - name: install conftest (pinned, retried -- release CDN 5xx happens)
+        run: |
+          for i in 1 2 3; do
+            if curl -sSfL --retry 2 -o /tmp/conftest.tgz \
+              https://github.com/open-policy-agent/conftest/releases/download/v0.56.0/conftest_0.56.0_Linux_x86_64.tar.gz &&
+              tar tzf /tmp/conftest.tgz >/dev/null 2>&1; then
+              tar xz -C /usr/local/bin -f /tmp/conftest.tgz conftest
+              exit 0
+            fi
+            echo "attempt $i failed; backing off" >&2
+            sleep 15
+          done
+          echo "conftest download failed after 3 attempts" >&2
+          exit 1
       - run: ./scripts/plan.sh dev
         env:
           # wire real provider creds via GH environment secrets
